@@ -8,6 +8,7 @@ import com.jpabook.jpashop.domain.item.Item;
 import com.jpabook.jpashop.repository.ItemRepository;
 import com.jpabook.jpashop.repository.MemberRepository;
 import com.jpabook.jpashop.repository.OrderRepository;
+import com.jpabook.jpashop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,5 +45,7 @@ public class OrderService {
         order.cancel();
     }
 
-//    public List<Order> searchOrders()
+    public List<Order> searchOrders(OrderSearch orderSearch) {
+        return orderRepository.searchOrder(orderSearch);
+    }
 }
