@@ -53,3 +53,16 @@
   * 변경감지 : 식별자로 find하여 영속성으로 들어온 객체를 받은 param으로 set
   * 병합 : 동작은 유사하나 모든 필드를 엎어침(선택불가)
   
+### Section 5
+* API 개발 기본 및 조회 최적화 
+  
+* Note
+  * 템플릿 엔진 컨트롤러, API 컨트롤러 분리 추천
+  * 엔티티 노출 금지(별도 객체 활용)
+  * DTO @getter, @setter, @data
+  * update 등에서 커맨드와 쿼리 분리
+  * 결과의 제일 바깥은 Object형식으로
+  * Lazy 로딩되기전에는 프록시 객체가 들어가있다. (강제초기화해야함)
+  * xToMany관계가 아니면 fetch join 사용
+  * DTO 반환 쿼리는 Trade-off가 있음
+  
