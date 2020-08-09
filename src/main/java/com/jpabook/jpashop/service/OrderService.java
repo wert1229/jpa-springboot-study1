@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -47,5 +48,9 @@ public class OrderService {
 
     public List<Order> searchOrders(OrderSearch orderSearch) {
         return orderRepository.searchOrder(orderSearch);
+    }
+
+    public List<Order> searchOrdersWithFetch() {
+        return orderRepository.searchOrdersWithFetch();
     }
 }

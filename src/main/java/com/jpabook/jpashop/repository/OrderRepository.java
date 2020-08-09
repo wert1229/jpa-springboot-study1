@@ -2,7 +2,6 @@ package com.jpabook.jpashop.repository;
 
 import com.jpabook.jpashop.domain.Member;
 import com.jpabook.jpashop.domain.Order;
-import com.jpabook.jpashop.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -50,5 +49,39 @@ public class OrderRepository {
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
 
         return query.getResultList();
+    }
+
+    public List<Order> searchOrdersWithFetch() {
+        return em.createQuery(
+                "select o from Order o " +
+                        "join fetch o.member " +
+                        "join fetch o.delivery", Order.class)
+                .getResultList();
+    }
+
+    public List<OrderV4Dto> searchOrderWithDto() {
+        return em.createQuery(
+                "select new com.jpabook.jpashop.repository.OrderV4Dto(" +
+                        "   o.id," +
+                        "   m.name," +
+                        "   o.orderDateTime," +
+                        "   o.status," +
+                        "   o.delivery.address) " +
+                        "from Order o " +
+                        "join o.member m " +
+                        "join o.delivery d", OrderV4Dto.class)
+                .getResultList();
+
+    }
+
+    public List<Order> searchOrderWithItem(OrderSearch orderSearch) {
+        return em.createQuery(
+                "select o " +
+                        "from Order o " +
+                        "join fetch o.member " +
+                        "join fetch o.delivery ", Order.class)
+                .setFirstResult(1)
+                .setMaxResults(100)
+                .getResultList();
     }
 }
